@@ -24,8 +24,8 @@
  * limitations under the License.
  */
 
-import {PluginType} from "./types/Plugin";
-import {ErrorCaused} from "./types/ErrorCaused";
+import {PluginType} from "./src/node/types/Plugin";
+import {ErrorCaused} from "./src/node/types/ErrorCaused";
 import {PromiseHooks} from "node:v8";
 
 import log4js from 'log4js';
