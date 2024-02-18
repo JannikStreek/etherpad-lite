@@ -88,16 +88,15 @@ COPY --chown=etherpad:etherpad ./.git/HEAD ./.git/HEAD
 COPY --chown=etherpad:etherpad ./.git/refs ./.git/refs
 COPY --chown=etherpad:etherpad ${SETTINGS} ./settings.json
 COPY --chown=etherpad:etherpad ./var ./var
-COPY --chown=etherpad:etherpad ./node_modules ./node_modules
 
 FROM build as development
 
-COPY --chown=etherpad:etherpad ./src/package.json .npmrc ./src/pnpm-lock.yaml ./src/
-COPY --chown=etherpad:etherpad ./src/bin ./src/bin
+COPY --chown=etherpad:etherpad ./package.json ./ep_etherpad-lite/package.json .npmrc ./ep_etherpad-lite/pnpm-lock.yaml ./ep_etherpad-lite/
+COPY --chown=etherpad:etherpad ./ep_etherpad-lite/bin ./ep_etherpad-lite/bin
 
 RUN { [ -z "${ETHERPAD_PLUGINS}" ] || \
       pnpm install --no-save --legacy-peer-deps ${ETHERPAD_PLUGINS}; } && \
-    src/bin/installDeps.sh
+    ep_etherpad-lite/bin/installDeps.sh
 
 FROM build as production
 
@@ -107,19 +106,19 @@ FROM build as production
 ENV NODE_ENV=production
 ENV ETHERPAD_PRODUCTION=true
 
-COPY --chown=etherpad:etherpad ./src ./src
+COPY --chown=etherpad:etherpad ./ep_etherpad-lite ./ep_etherpad-lite
 
 # Plugins must be installed before installing Etherpad's dependencies, otherwise
 # npm will try to hoist common dependencies by removing them from
-# src/node_modules and installing them in the top-level node_modules. As of
+# ep_etherpad-lite/node_modules and installing them in the top-level node_modules. As of
 # v6.14.10, npm's hoist logic appears to be buggy, because it sometimes removes
-# dependencies from src/node_modules but fails to add them to the top-level
+# dependencies from ep_etherpad-lite/node_modules but fails to add them to the top-level
 # node_modules. Even if npm correctly hoists the dependencies, the hoisting
 # seems to confuse tools such as `npm outdated`, `npm update`, and some ESLint
 # rules.
 RUN { [ -z "${ETHERPAD_PLUGINS}" ] || \
       pnpm install --no-save --legacy-peer-deps ${ETHERPAD_PLUGINS}; } && \
-    src/bin/installDeps.sh && \
+    ep_etherpad-lite/bin/installDeps.sh && \
     rm -rf ~/.npm
 
 # Copy the configuration file.
@@ -135,4 +134,4 @@ HEALTHCHECK --interval=5s --timeout=3s \
   CMD curl --silent http://localhost:9001/health | grep -E "pass|ok|up" > /dev/null || exit 1
 
 EXPOSE 9001
-CMD ["npm", "run", "prod", "--prefix", "./src"]
+CMD ["npm", "run", "prod", "--prefix", "./ep_etherpad-lite"]

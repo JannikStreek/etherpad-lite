@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Frontend tests</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="runner.css" />
+  </head>
+  <body>
+    <div id="console"></div>
+    <div id="split-view">
+      <div id="mocha"></div>
+      <div id="separator"></div>
+      <div id="iframe-container"></div>
+    </div>
+
+    <script ep_etherpad-lite="../../static/js/require-kernel.js"></script>
+    <script ep_etherpad-lite="../../static/js/vendors/jquery.js"></script>
+    <script ep_etherpad-lite="lib/sendkeys.js"></script>
+    <script ep_etherpad-lite="../../static/js/vendors/browser.js"></script>
+    <script ep_etherpad-lite="../../static/plugins/js-cookie/dist/js.cookie.js"></script>
+    <script ep_etherpad-lite="lib/underscore.js"></script>
+
+    <script ep_etherpad-lite="lib/mocha.js"></script>
+    <script> mocha.setup({ui: 'bdd', checkLeaks: true, globals: 'ret_nodes', timeout: 60000}) </script>
+    <script ep_etherpad-lite="lib/expect.js"></script>
+
+    <script ep_etherpad-lite="helper.js"></script>
+    <script ep_etherpad-lite="helper/methods.js"></script>
+    <script ep_etherpad-lite="helper/ui.js"></script>
+    <script ep_etherpad-lite="helper/multipleUsers.js"></script>
+    <script ep_etherpad-lite="runner.js"></script>
+  </body>
+</html>

@@ -23,4 +23,4 @@ Dockerfile
 .gitignore
 
 settings.json
-src/node_modules
+ep_etherpad-lite/node_modules

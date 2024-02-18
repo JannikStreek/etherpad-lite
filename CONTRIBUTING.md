@@ -123,7 +123,7 @@ You can build the docs e.g. produce html, using `make docs`. At some point in th
 ## Testing
 Front-end tests are found in the `tests/frontend/` folder in the repository. Run them by pointing your browser to `<yourdomainhere>/tests/frontend`.
 
-Back-end tests can be run from the `src` directory, via `npm test`.
+Back-end tests can be run from the `ep_etherpad-lite` directory, via `npm test`.
 You can use `npm test -- --inspect-brk` and navigate to `edge://inspect` or `chrome://inspect` to debug the tests.
 
 ## Things you can help with

@@ -3,7 +3,7 @@
 'use strict';
 
 /**
- * This module is started with src/bin/run.sh. It sets up a Express HTTP and a Socket.IO Server.
+ * This module is started with ep_etherpad-lite/bin/run.sh. It sets up a Express HTTP and a Socket.IO Server.
  * Static file Requests are answered directly from this module, Socket.IO messages are passed
  * to MessageHandler and minfied requests are passed to minified.
  */
@@ -24,13 +24,13 @@
  * limitations under the License.
  */
 
-import {PluginType} from "./src/node/types/Plugin";
-import {ErrorCaused} from "./src/node/types/ErrorCaused";
+import {PluginType} from "./ep_etherpad-lite/node/types/Plugin";
+import {ErrorCaused} from "./ep_etherpad-lite/node/types/ErrorCaused";
 import {PromiseHooks} from "node:v8";
 
 import log4js from 'log4js';
 
-const settings = require('./utils/Settings');
+const settings = require('./ep_etherpad-lite/node/utils/Settings');
 
 let wtfnode: any;
 if (settings.dumpOnUncleanExit) {
@@ -43,19 +43,19 @@ if (settings.dumpOnUncleanExit) {
  * early check for version compatibility before calling
  * any modules that require newer versions of NodeJS
  */
-const NodeVersion = require('./utils/NodeVersion');
+const NodeVersion = require('./ep_etherpad-lite/node/utils/NodeVersion');
 NodeVersion.enforceMinNodeVersion('12.17.0');
 NodeVersion.checkDeprecationStatus('12.17.0', '1.9.0');
 
-const UpdateCheck = require('./utils/UpdateCheck');
-const db = require('./db/DB');
-const express = require('./hooks/express');
-const hooks = require('../static/js/pluginfw/hooks');
-const pluginDefs = require('../static/js/pluginfw/plugin_defs');
-const plugins = require('../static/js/pluginfw/plugins');
-const installer = require('../static/js/pluginfw/installer');
-const {Gate} = require('./utils/promises');
-const stats = require('./stats')
+const UpdateCheck = require('./ep_etherpad-lite/node/utils/UpdateCheck');
+const db = require('./ep_etherpad-lite/node/db/DB');
+const express = require('./ep_etherpad-lite/node/hooks/express');
+const hooks = require('./ep_etherpad-lite/static/js/pluginfw/hooks');
+const pluginDefs = require('./ep_etherpad-lite/static/js/pluginfw/plugin_defs');
+const plugins = require('./ep_etherpad-lite/static/js/pluginfw/plugins');
+const installer = require('./ep_etherpad-lite/static/js/pluginfw/installer');
+const {Gate} = require('./ep_etherpad-lite/node/utils/promises');
+const stats = require('./ep_etherpad-lite/node/stats')
 
 const logger = log4js.getLogger('server');
 

@@ -47,8 +47,8 @@ jobs:
         name: build docker image
         run: |
           docker build -f Dockerfile -t epl-debian-slim --build-arg NODE_ENV=develop .
-          docker build -f src/tests/ratelimit/Dockerfile.nginx -t nginx-latest .
-          docker build -f src/tests/ratelimit/Dockerfile.anotherip -t anotherip .
+          docker build -f ep_etherpad-lite/tests/ratelimit/Dockerfile.nginx -t nginx-latest .
+          docker build -f ep_etherpad-lite/tests/ratelimit/Dockerfile.anotherip -t anotherip .
       -
         name: run docker images
         run: |
@@ -57,9 +57,9 @@ jobs:
           docker run --rm --network ep_net --ip 172.23.42.3 --name anotherip -dt anotherip
       -
         name: install dependencies and create symlink for ep_etherpad-lite
-        run: src/bin/installDeps.sh
+        run: ep_etherpad-lite/bin/installDeps.sh
       -
         name: run rate limit test
         run: |
-          cd src/tests/ratelimit
+          cd ep_etherpad-lite/tests/ratelimit
           ./testlimits.sh

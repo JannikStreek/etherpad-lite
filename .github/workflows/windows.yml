@@ -50,15 +50,15 @@ jobs:
       -
         name: Install all dependencies and symlink for ep_etherpad-lite
         shell: msys2 {0}
-        run: src/bin/installDeps.sh
+        run: ep_etherpad-lite/bin/installDeps.sh
       -
         name: Run the backend tests
         shell: msys2 {0}
-        run: cd src && pnpm test
+        run: cd ep_etherpad-lite && pnpm test
       -
         name: Build the .zip
         shell: msys2 {0}
-        run: src/bin/buildForWindows.sh
+        run: ep_etherpad-lite/bin/buildForWindows.sh
       -
         name: Archive production artifacts
         uses: actions/upload-artifact@v4
@@ -91,7 +91,7 @@ jobs:
         name: Create installer
         uses: joncloud/makensis-action@v4.1
         with:
-          script-file: 'src/bin/nsis/etherpad.nsi'
+          script-file: 'ep_etherpad-lite/bin/nsis/etherpad.nsi'
       -
         name: Archive production artifacts
         uses: actions/upload-artifact@v4
@@ -143,10 +143,10 @@ jobs:
         run: pnpm config set auto-install-peers false
       - name: Install all dependencies and symlink for ep_etherpad-lite
         run: .\bin\installOnWindows.bat
-        working-directory: etherpad/src
+        working-directory: etherpad/ep_etherpad-lite
       -
         name: Run Etherpad
-        working-directory: etherpad/src
+        working-directory: etherpad/ep_etherpad-lite
         run: |
           .\node_modules\.bin\cypress.cmd install --force
           pnpm run prod &

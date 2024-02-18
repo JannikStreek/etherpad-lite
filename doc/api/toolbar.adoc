@@ -1,5 +1,5 @@
 == Toolbar controller
-src/node/utils/toolbar.js
+ep_etherpad-lite/node/utils/toolbar.js
 
 === button(opts)
  * {Object} `opts`

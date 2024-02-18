@@ -60,7 +60,7 @@ jobs:
         name: Test
         run: |
           docker run --rm -d -p 9001:9001 --name test ${{ env.TEST_TAG }}
-          ./src/bin/installDeps.sh
+          ./ep_etherpad-lite/bin/installDeps.sh
           docker logs -f test &
           while true; do
             echo "Waiting for Docker container to start..."
@@ -71,7 +71,7 @@ jobs:
               *) printf %s\\n "unexpected status: ${status}" >&2; exit 1;;
             esac
           done
-          (cd src && pnpm run test-container)
+          (cd ep_etherpad-lite && pnpm run test-container)
           git clean -dxf .
       -
         name: Docker meta

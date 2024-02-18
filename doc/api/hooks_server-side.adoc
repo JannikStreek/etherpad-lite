@@ -2,7 +2,7 @@
 These hooks are called on server-side.
 
 === loadSettings
-Called from: src/node/server.ts
+Called from: ep_etherpad-lite/node/server.ts
 
 Things in context:
 
@@ -11,7 +11,7 @@ Things in context:
 Use this hook to receive the global settings in your plugin.
 
 === shutdown
-Called from: src/node/server.ts
+Called from: ep_etherpad-lite/node/server.ts
 
 Things in context: None
 
@@ -34,7 +34,7 @@ exports.shutdown = async (hookName, context) => {
 ----
 
 === pluginUninstall
-Called from: src/static/js/pluginfw/installer.js
+Called from: ep_etherpad-lite/static/js/pluginfw/installer.js
 
 Things in context:
 
@@ -43,7 +43,7 @@ Things in context:
 If this hook returns an error, the callback to the uninstall function gets an error as well. This mostly seems useful for handling additional features added in based on the installation of other plugins, which is pretty cool!
 
 === pluginInstall
-Called from: src/static/js/pluginfw/installer.js
+Called from: ep_etherpad-lite/static/js/pluginfw/installer.js
 
 Things in context:
 
@@ -53,7 +53,7 @@ If this hook returns an error, the callback to the install function gets an erro
 
 === init_<plugin name>
 
-Called from: `src/static/js/pluginfw/plugins.js`
+Called from: `ep_etherpad-lite/static/js/pluginfw/plugins.js`
 
 Run during startup after the named plugin is initialized.
 
@@ -64,7 +64,7 @@ Context properties:
 
 === expressPreSession
 
-Called from: `src/node/hooks/express.js`
+Called from: `ep_etherpad-lite/node/hooks/express.js`
 
 Called during server startup just before the
 https://www.npmjs.com/package/express-session[`express-session`] middleware is
@@ -94,7 +94,7 @@ exports.expressPreSession = async (hookName, {app}) => {
 
 === expressConfigure
 
-Called from: `src/node/hooks/express.js`
+Called from: `ep_etherpad-lite/node/hooks/express.js`
 
 Called during server startup just after the
 https://www.npmjs.com/package/express-session[`express-session`] middleware is
@@ -109,7 +109,7 @@ Context properties:
 
 === expressCreateServer
 
-Called from: `src/node/hooks/express.js`
+Called from: `ep_etherpad-lite/node/hooks/express.js`
 
 Identical to the `expressConfigure` hook (the two run in parallel with each
 other) except this hook's context includes the HTTP Server object.
@@ -123,7 +123,7 @@ Context properties:
 
 === expressCloseServer
 
-Called from: src/node/hooks/express.js
+Called from: ep_etherpad-lite/node/hooks/express.js
 
 Things in context: Nothing
 
@@ -142,7 +142,7 @@ exports.expressCloseServer = async () => {
 ----
 
 === eejsBlock_`<name>`
-Called from: src/node/eejs/index.js
+Called from: ep_etherpad-lite/node/eejs/index.js
 
 Things in context:
 
@@ -185,7 +185,7 @@ Available blocks in `pad.html` are:
  * `indexCustomScripts` - contains the `index.js` `<script>` tag, allows you to add your own or to customize the one provided by the active skin
 
 === padInitToolbar
-Called from: src/node/hooks/express/specialpages.js
+Called from: ep_etherpad-lite/node/hooks/express/specialpages.js
 
 Things in context:
 
@@ -198,7 +198,7 @@ Usage examples:
 * https://github.com/tiblu/ep_authorship_toggle
 
 === onAccessCheck
-Called from: src/node/db/SecurityManager.js
+Called from: ep_etherpad-lite/node/db/SecurityManager.js
 
 Things in context:
 
@@ -212,7 +212,7 @@ Return `false` to deny access.
 
 === getAuthorId
 
-Called from `src/node/db/AuthorManager.js`
+Called from `ep_etherpad-lite/node/db/AuthorManager.js`
 
 Called when looking up (or creating) the author ID for a user, except for author
 IDs obtained via the HTTP API. Registered hook functions are called until one
@@ -269,7 +269,7 @@ exports.getAuthorId = async (hookName, context) => {
 
 === padCreate
 
-Called from: `src/node/db/Pad.js`
+Called from: `ep_etherpad-lite/node/db/Pad.js`
 
 Called when a new pad is created.
 
@@ -281,7 +281,7 @@ Context properties:
 
 === padDefaultContent
 
-Called from `src/node/db/Pad.js`
+Called from `ep_etherpad-lite/node/db/Pad.js`
 
 Called to obtain a pad's initial content, unless the pad is being created with
 specific content. The return value is ignored; to change the content, modify the
@@ -306,7 +306,7 @@ Context properties:
 
 === padLoad
 
-Called from: `src/node/db/PadManager.js`
+Called from: `ep_etherpad-lite/node/db/PadManager.js`
 
 Called when a pad is loaded, including after new pad creation.
 
@@ -317,7 +317,7 @@ Context properties:
 [#_padupdate]
 === padUpdate
 
-Called from: `src/node/db/Pad.js`
+Called from: `ep_etherpad-lite/node/db/Pad.js`
 
 Called when an existing pad is updated.
 
@@ -331,7 +331,7 @@ Context properties:
 
 === padCopy
 
-Called from: `src/node/db/Pad.js`
+Called from: `ep_etherpad-lite/node/db/Pad.js`
 
 Called when a pad is copied so that plugins can copy plugin-specific database
 records or perform some other plugin-specific initialization.
@@ -348,7 +348,7 @@ Order of events when a pad is copied:
 
 Context properties:
 
-  * `srcPad`: The source Pad object.
+  * `ep_etherpad-litePad`: The source Pad object.
   * `dstPad`: The destination Pad object.
 
 Usage examples:
@@ -357,7 +357,7 @@ Usage examples:
 
 === padRemove
 
-Called from: `src/node/db/Pad.js`
+Called from: `ep_etherpad-lite/node/db/Pad.js`
 
 Called when an existing pad is removed/deleted. Plugins should use this to clean
 up any plugin-specific pad records from the database.
@@ -372,7 +372,7 @@ Usage examples:
 
 === padCheck
 
-Called from: `src/node/db/Pad.js`
+Called from: `ep_etherpad-lite/node/db/Pad.js`
 
 Called when a consistency check is run on a pad, after the core checks have
 completed successfully. An exception should be thrown if the pad is faulty in
@@ -383,7 +383,7 @@ Context properties:
   * `pad`: The Pad object that is being checked.
 
 === socketio
-Called from: src/node/hooks/express/socketio.js
+Called from: ep_etherpad-lite/node/hooks/express/socketio.js
 
 Things in context:
 
@@ -395,7 +395,7 @@ I have no idea what this is useful for, someone else will have to add this descr
 
 === preAuthorize
 
-Called from: `src/node/hooks/express/webaccess.js`
+Called from: `ep_etherpad-lite/node/hooks/express/webaccess.js`
 
 Called for each HTTP request before any authentication checks are performed. The
 registered `preAuthorize` hook functions are called one at a time until one
@@ -444,7 +444,7 @@ exports.preAuthorize = async (hookName, {req}) => {
 ----
 
 === authorize
-Called from: src/node/hooks/express/webaccess.js
+Called from: ep_etherpad-lite/node/hooks/express/webaccess.js
 
 Things in context:
 
@@ -501,7 +501,7 @@ exports.authorize = (hookName, context, cb) => {
 ----
 
 === authenticate
-Called from: src/node/hooks/express/webaccess.js
+Called from: ep_etherpad-lite/node/hooks/express/webaccess.js
 
 Things in context:
 
@@ -559,7 +559,7 @@ exports.authenticate = (hook_name, context, cb) => {
 ----
 
 === authFailure
-Called from: src/node/hooks/express/webaccess.js
+Called from: ep_etherpad-lite/node/hooks/express/webaccess.js
 
 Things in context:
 
@@ -605,7 +605,7 @@ exports.authFailure = (hookName, context, cb) => {
 ----
 
 === preAuthzFailure
-Called from: src/node/hooks/express/webaccess.js
+Called from: ep_etherpad-lite/node/hooks/express/webaccess.js
 
 Things in context:
 
@@ -635,7 +635,7 @@ exports.preAuthzFailure = (hookName, context, cb) => {
 ----
 
 === authnFailure
-Called from: src/node/hooks/express/webaccess.js
+Called from: ep_etherpad-lite/node/hooks/express/webaccess.js
 
 Things in context:
 
@@ -668,7 +668,7 @@ exports.authnFailure = (hookName, context, cb) => {
 ----
 
 === authzFailure
-Called from: src/node/hooks/express/webaccess.js
+Called from: ep_etherpad-lite/node/hooks/express/webaccess.js
 
 Things in context:
 
@@ -702,7 +702,7 @@ exports.authzFailure = (hookName, context, cb) => {
 
 === handleMessage
 
-Called from: `src/node/handler/PadMessageHandler.js`
+Called from: `ep_etherpad-lite/node/handler/PadMessageHandler.js`
 
 This hook allows plugins to drop or modify incoming socket.io messages from
 clients, before Etherpad processes them. If any hook function returns `null`
@@ -735,7 +735,7 @@ exports.handleMessage = async (hookName, {message, socket}) => {
 
 === handleMessageSecurity
 
-Called from: `src/node/handler/PadMessageHandler.js`
+Called from: `ep_etherpad-lite/node/handler/PadMessageHandler.js`
 
 Called for each incoming message from a client. Allows plugins to grant
 temporary write access to a pad.
@@ -777,7 +777,7 @@ exports.handleMessageSecurity = async (hookName, context) => {
 ----
 
 === clientVars
-Called from: src/node/handler/PadMessageHandler.js
+Called from: ep_etherpad-lite/node/handler/PadMessageHandler.js
 
 Things in context:
 
@@ -821,7 +821,7 @@ exports.clientVars = (hookName, context, callback) => {
 
 === getLineHTMLForExport
 
-Called from: `src/node/utils/ExportHtml.js`
+Called from: `ep_etherpad-lite/node/utils/ExportHtml.js`
 
 This hook will allow a plug-in developer to re-write each line when exporting to
 HTML.
@@ -853,7 +853,7 @@ exports.getLineHTMLForExport = async (hookName, context) => {
 ----
 
 === exportHTMLAdditionalContent
-Called from: src/node/utils/ExportHtml.js
+Called from: ep_etherpad-lite/node/utils/ExportHtml.js
 
 Things in context:
 
@@ -872,7 +872,7 @@ exports.exportHTMLAdditionalContent = async (hookName, {padId}) => {
 ----
 
 === stylesForExport
-Called from: src/node/utils/ExportHtml.js
+Called from: ep_etherpad-lite/node/utils/ExportHtml.js
 
 Things in context:
 
@@ -890,7 +890,7 @@ exports.stylesForExport = function(hook, padId, cb){
 ----
 
 === aceAttribClasses
-Called from: src/static/js/linestylefilter.js
+Called from: ep_etherpad-lite/static/js/linestylefilter.js
 
 This hook is called when attributes are investigated on a line. It is useful if
 you want to add another attribute type or property type to a pad.
@@ -911,7 +911,7 @@ exports.aceAttribClasses = (hookName, attrs, cb) => {
 ----
 
 === exportFileName
-Called from src/node/handler/ExportHandler.js
+Called from ep_etherpad-lite/node/handler/ExportHandler.js
 
 Things in context:
 
@@ -929,7 +929,7 @@ exports.exportFileName = function(hook, padId, callback){
 ----
 
 === exportHtmlAdditionalTags
-Called from src/node/utils/ExportHtml.js
+Called from ep_etherpad-lite/node/utils/ExportHtml.js
 
 Things in context:
 
@@ -949,7 +949,7 @@ exports.exportHtmlAdditionalTags = function(hook, pad, cb){
 ----
 
 === exportHtmlAdditionalTagsWithData
-Called from src/node/utils/ExportHtml.js
+Called from ep_etherpad-lite/node/utils/ExportHtml.js
 
 Things in context:
 
@@ -970,8 +970,8 @@ exports.exportHtmlAdditionalTagsWithData = function(hook, pad, cb){
 
 === exportEtherpadAdditionalContent
 
-Called from `src/node/utils/ExportEtherpad.js` and
-`src/node/utils/ImportEtherpad.js`.
+Called from `ep_etherpad-lite/node/utils/ExportEtherpad.js` and
+`ep_etherpad-lite/node/utils/ImportEtherpad.js`.
 
 Called when exporting to an `.etherpad` file or when importing from an
 `.etherpad` file. The hook function should return prefixes for pad-specific
@@ -992,7 +992,7 @@ exports.exportEtherpadAdditionalContent = () => ['comments'];
 
 === exportEtherpad
 
-Called from `src/node/utils/ExportEtherpad.js`.
+Called from `ep_etherpad-lite/node/utils/ExportEtherpad.js`.
 
 Called when exporting to an `.etherpad` file.
 
@@ -1015,7 +1015,7 @@ Context properties:
 
 === importEtherpad
 
-Called from `src/node/utils/ImportEtherpad.js`.
+Called from `ep_etherpad-lite/node/utils/ImportEtherpad.js`.
 
 Called when importing from an `.etherpad` file.
 
@@ -1030,11 +1030,11 @@ Context properties:
     care should be taken to avoid race conditions with other plugins.
   * `data`: Raw JSONable object from the `.etherpad` file. This data must not be
     modified.
-  * `srcPadId`: The pad ID used for the pad-specific information in `data`.
+  * `ep_etherpad-litePadId`: The pad ID used for the pad-specific information in `data`.
 
 === import
 
-Called from: `src/node/handler/ImportHandler.js`
+Called from: `ep_etherpad-lite/node/handler/ImportHandler.js`
 
 Called when a user submits a document for import, before the document is
 converted to HTML. The hook function should return a truthy value if the hook
@@ -1043,13 +1043,13 @@ function elected to convert the document to HTML.
 Context properties:
 
 * `destFile`: The destination HTML filename.
-* `fileEnding`: The lower-cased filename extension from `srcFile` **with leading
+* `fileEnding`: The lower-cased filename extension from `ep_etherpad-liteFile` **with leading
   period** (examples: `'.docx'`, `'.html'`, `'.etherpad'`).
 * `padId`: The identifier of the destination pad.
-* `srcFile`: The document to convert.
+* `ep_etherpad-liteFile`: The document to convert.
 * `ImportError`: Subclass of Error that can be thrown to provide a specific
   error message to the user. The constructor's first argument must be a string
-  matching one of the https://github.com/ether/etherpad-lite/blob/1.9.6/src/static/js/pad_impexp.js#L80-L86[known error identifiers].
+  matching one of the https://github.com/ether/etherpad-lite/blob/1.9.6/ep_etherpad-lite/static/js/pad_impexp.js#L80-L86[known error identifiers].
 
 Example:
 
@@ -1063,7 +1063,7 @@ exports.import = async (hookName, {fileEnding, ImportError}) => {
 
 === userJoin
 
-Called from: `src/node/handler/PadMessageHandler.js`
+Called from: `ep_etherpad-lite/node/handler/PadMessageHandler.js`
 
 Called after users have been notified that a new user has joined the pad.
 
@@ -1087,7 +1087,7 @@ exports.userJoin = async (hookName, {authorId, displayName, padId}) => {
 
 === userLeave
 
-Called from: `src/node/handler/PadMessageHandler.js`
+Called from: `ep_etherpad-lite/node/handler/PadMessageHandler.js`
 
 Called when a user disconnects from a pad. This is useful if you want to perform
 certain actions after a pad has been edited.
@@ -1111,7 +1111,7 @@ exports.userLeave = async (hookName, {author, padId}) => {
 
 === chatNewMessage
 
-Called from: `src/node/handler/PadMessageHandler.js`
+Called from: `ep_etherpad-lite/node/handler/PadMessageHandler.js`
 
 Called when a user (or plugin) generates a new chat message, just before it is
 saved to the pad and relayed to all connected users.

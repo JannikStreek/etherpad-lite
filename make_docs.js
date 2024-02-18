@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 
 
-const pjson = require('./src/package.json')
+const pjson = require('./ep_etherpad-lite/package.json')
 const VERSION=pjson.version
 console.log(`Building docs for version ${VERSION}`)
 

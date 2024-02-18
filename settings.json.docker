@@ -115,7 +115,7 @@
   /*
    * Skin name.
    *
-   * Its value has to be an existing directory under src/static/skins.
+   * Its value has to be an existing directory under ep_etherpad-lite/static/skins.
    * You can write your own, or use one of the included ones:
    *
    * - "no-skin":  an empty skin (default). This yields the unmodified,

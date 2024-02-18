@@ -43,13 +43,13 @@ jobs:
         run: pnpm config set auto-install-peers false
       -
         name: Install all dependencies and symlink for ep_etherpad-lite
-        run: src/bin/installDeps.sh
+        run: ep_etherpad-lite/bin/installDeps.sh
       -
         name: Install etherpad-load-test
         run: sudo npm install -g etherpad-load-test-socket-io
       -
         name: Run load test
-        run: src/tests/frontend/travis/runnerLoadTest.sh 25 50
+        run: ep_etherpad-lite/tests/frontend/travis/runnerLoadTest.sh 25 50
 
   withplugins:
     # run on pushes to any branch
@@ -108,19 +108,19 @@ jobs:
           ep_table_of_contents
       # Etherpad core dependencies must be installed after installing the
       # plugin's dependencies, otherwise npm will try to hoist common
-      # dependencies by removing them from src/node_modules and installing them
+      # dependencies by removing them from ep_etherpad-lite/node_modules and installing them
       # in the top-level node_modules. As of v6.14.10, npm's hoist logic appears
       # to be buggy, because it sometimes removes dependencies from
-      # src/node_modules but fails to add them to the top-level node_modules.
+      # ep_etherpad-lite/node_modules but fails to add them to the top-level node_modules.
       # Even if npm correctly hoists the dependencies, the hoisting seems to
       # confuse tools such as `npm outdated`, `npm update`, and some ESLint
       # rules.
       -
         name: Install all dependencies and symlink for ep_etherpad-lite
-        run: src/bin/installDeps.sh
+        run: ep_etherpad-lite/bin/installDeps.sh
       -
         name: Run load test
-        run: src/tests/frontend/travis/runnerLoadTest.sh 25 50
+        run: ep_etherpad-lite/tests/frontend/travis/runnerLoadTest.sh 25 50
 
   long:
     # run on pushes to any branch
@@ -158,10 +158,10 @@ jobs:
         run: pnpm config set auto-install-peers false
       -
         name: Install all dependencies and symlink for ep_etherpad-lite
-        run: src/bin/installDeps.sh
+        run: ep_etherpad-lite/bin/installDeps.sh
       -
         name: Install etherpad-load-test
         run: sudo npm install -g etherpad-load-test-socket-io
       -
         name: Run load test
-        run: src/tests/frontend/travis/runnerLoadTest.sh 5000 5
+        run: ep_etherpad-lite/tests/frontend/travis/runnerLoadTest.sh 5000 5

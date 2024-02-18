@@ -68,19 +68,19 @@ jobs:
           ep_table_of_contents
       # Etherpad core dependencies must be installed after installing the
       # plugin's dependencies, otherwise npm will try to hoist common
-      # dependencies by removing them from src/node_modules and installing them
+      # dependencies by removing them from ep_etherpad-lite/node_modules and installing them
       # in the top-level node_modules. As of v6.14.10, npm's hoist logic appears
       # to be buggy, because it sometimes removes dependencies from
-      # src/node_modules but fails to add them to the top-level node_modules.
+      # ep_etherpad-lite/node_modules but fails to add them to the top-level node_modules.
       # Even if npm correctly hoists the dependencies, the hoisting seems to
       # confuse tools such as `npm outdated`, `npm update`, and some ESLint
       # rules.
       -
         name: Install all dependencies and symlink for ep_etherpad-lite
-        run: src/bin/installDeps.sh
+        run: ep_etherpad-lite/bin/installDeps.sh
       -
         name: Run the backend tests
-        run: cd src && pnpm test
+        run: cd ep_etherpad-lite && pnpm test
       # Because actions/checkout@v4 is called with "ref: master" and without
       # "fetch-depth: 0", the local clone does not have the ${GITHUB_SHA}
       # commit. Fetch ${GITHUB_REF} to get the ${GITHUB_SHA} commit. Note that a
@@ -98,18 +98,18 @@ jobs:
         run: git checkout "${GITHUB_SHA}"
       -
         name: Install all dependencies and symlink for ep_etherpad-lite
-        run: src/bin/installDeps.sh
+        run: ep_etherpad-lite/bin/installDeps.sh
       -
         name: Run the backend tests
-        working-directory: ./src
+        working-directory: ./ep_etherpad-lite
         run: npm test
       -
         name: Install Cypress
-        working-directory: ./src
+        working-directory: ./ep_etherpad-lite
         run: pnpm install cypress
       -
         name: Run Etherpad & Test Frontend
-        working-directory: ./src
+        working-directory: ./ep_etherpad-lite
         run: |
           npm run dev &
           curl --connect-timeout 10 --max-time 20 --retry 5 --retry-delay 10 --retry-max-time 60 --retry-connrefused http://127.0.0.1:9001/p/test

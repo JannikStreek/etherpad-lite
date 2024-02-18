@@ -2,7 +2,7 @@ extraction:
   javascript:
     index:
       exclude:
-        - src/static/js/vendors
+        - ep_etherpad-lite/static/js/vendors
   python:
     index:
       exclude:

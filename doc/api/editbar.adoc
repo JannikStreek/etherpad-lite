@@ -1,5 +1,5 @@
 == Editbar
-src/static/js/pad_editbar.js
+ep_etherpad-lite/static/js/pad_editbar.js
 
 === isEnabled()
 

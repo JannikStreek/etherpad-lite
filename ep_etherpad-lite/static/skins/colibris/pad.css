@@ -1,0 +1,70 @@
+@import url("ep_etherpad-lite/general.css");
+@import url("ep_etherpad-lite/layout.css");
+@import url("ep_etherpad-lite/pad-editor.css");
+
+@import url("ep_etherpad-lite/components/scrollbars.css");
+@import url("ep_etherpad-lite/components/buttons.css");
+@import url("ep_etherpad-lite/components/popup.css");
+
+@import url("ep_etherpad-lite/components/chat.css");
+@import url("ep_etherpad-lite/components/sidediv.css");
+@import url("ep_etherpad-lite/components/gritter.css");
+@import url("ep_etherpad-lite/components/table-of-content.css");
+@import url("ep_etherpad-lite/components/toolbar.css");
+@import url("ep_etherpad-lite/components/users.css");
+@import url("ep_etherpad-lite/components/form.css");
+@import url("ep_etherpad-lite/components/import-export.css");
+
+@import url("ep_etherpad-lite/plugins/brightcolorpicker.css");
+@import url("ep_etherpad-lite/plugins/font_color.css");
+@import url("ep_etherpad-lite/plugins/tables2.css");
+@import url("ep_etherpad-lite/plugins/set_title_on_pad.css");
+@import url("ep_etherpad-lite/plugins/author_hover.css");
+@import url("ep_etherpad-lite/plugins/comments.css");
+
+@import url("ep_etherpad-lite/pad-variants.css");
+
+/* -----------------------------------------------------------------
+ * COLORS
+ * If you want to change main colors, please replace following CSS variables
+ * -----------------------------------------------------------------
+ */
+
+:root {
+  --super-dark-color: #485365; /*#374256;*/
+  --dark-color: #576273; /*#4d5d77*/
+
+  --primary-color: #64d29b;
+  --middle-color: #d2d2d2; /* kind of grey, use for border for examples */
+
+  --light-color: #f2f3f4; /*#f9f9f9;*/
+  --super-light-color: white;
+
+  --text-color: var(--super-dark-color);
+  --text-soft-color: var(--dark-color);
+  --border-color: var(--middle-color);
+  --bg-soft-color: var(--light-color);
+  --bg-color: var(--super-light-color);
+
+  --toolbar-border: none;
+
+  --main-font-family: Quicksand, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  /* Those padding like an external padding. Basic padding of 15px is always applied */
+  --editor-horizontal-padding: 40px;
+  --editor-vertical-padding: 25px;
+}
+
+@media (max-width:1000px) {
+  :root {
+    --editor-horizontal-padding: 0px;
+    --editor-vertical-padding: 0px;
+  }
+}
+
+/* Default scrollbar values */
+body {
+  --scrollbar-bg: var(--light-color);
+  --scrollbar-track: var(--super-light-color);
+  --scrollbar-thumb: var(--dark-color);
+}

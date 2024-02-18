@@ -7,7 +7,7 @@ Cut and paste the following code into any webpage to embed a pad. The parameters
 
 [source, html]
 ----
-<iframe src='http://pad.test.de/p/PAD_NAME#L4?showChat=false&showLineNumbers=false' width=600 height=400></iframe>
+<iframe ep_etherpad-lite='http://pad.test.de/p/PAD_NAME#L4?showChat=false&showLineNumbers=false' width=600 height=400></iframe>
 ----
 
 === showLineNumbers

@@ -1,0 +1,4 @@
+FROM node:latest
+WORKDIR /tmp
+RUN npm i etherpad-cli-client
+COPY ./ep_etherpad-lite/tests/ratelimit/send_changesets.js /tmp/send_changesets.js

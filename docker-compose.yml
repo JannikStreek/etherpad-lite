@@ -15,8 +15,11 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - ./src:/opt/etherpad-lite/src
-      - node_modules:/opt/etherpad-lite/src/node_modules
+      - ./ep_etherpad-lite:/opt/etherpad-lite/ep_etherpad-lite
+      - ./server.ts:/opt/etherpad-lite/server.ts
+      - ./package.json:/opt/etherpad-lite/package.json
+      - ./plugins:/opt/etherpad-lite/plugins
+      - node_modules:/opt/etherpad-lite/ep_etherpad-lite/node_modules
       - pnpm-store:/home/etherpad/.local/share/pnpm/store/v3
     depends_on:
       - postgres

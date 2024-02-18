@@ -18,9 +18,9 @@ out/
 .nyc_output
 .idea
 /package-lock.json
-/src/bin/abiword.exe
-/src/bin/convertSettings.json
-/src/bin/etherpad-1.deb
-/src/bin/node.exe
+/ep_etherpad-lite/bin/abiword.exe
+/ep_etherpad-lite/bin/convertSettings.json
+/ep_etherpad-lite/bin/etherpad-1.deb
+/ep_etherpad-lite/bin/node.exe
 plugin_packages
 /pnpm-lock.yaml

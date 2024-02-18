@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "npm"
-    directory: "/src"
+    directory: "/ep_etherpad-lite"
     schedule:
       interval: "daily"
     versioning-strategy: "increase"

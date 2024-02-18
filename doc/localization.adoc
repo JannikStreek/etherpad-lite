@@ -16,7 +16,7 @@ Translations will be send back to us regularly and will eventually appear in the
 === Implementation
 
 ==== Server-side
-`/src/locales` contains files for all supported languages which contain the translated strings. Translation files are simple `*.json` files and look like this:
+`/ep_etherpad-lite/locales` contains files for all supported languages which contain the translated strings. Translation files are simple `*.json` files and look like this:
 
 [source,json]
 ----

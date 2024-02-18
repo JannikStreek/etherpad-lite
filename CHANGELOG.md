@@ -158,7 +158,7 @@ If you haven't changed that value in the settings.json you are all set.
 * New `expressPreSession` server-side hook.
 * Pad server-side hook changes:
   * `padCheck`: New hook.
-  * `padCopy`: New `srcPad` and `dstPad` context properties.
+  * `padCopy`: New `ep_etherpad-litePad` and `dstPad` context properties.
   * `padDefaultContent`: New hook.
   * `padRemove`: New `pad` context property.
 * The `db` property on Pad objects is now public.
@@ -192,7 +192,7 @@ If you haven't changed that value in the settings.json you are all set.
   property instead.
 * Pad server-side hook changes:
   * `padCopy`:
-    * The `originalPad` context property is deprecated; use `srcPad` instead.
+    * The `originalPad` context property is deprecated; use `ep_etherpad-litePad` instead.
     * The `destinationID` context property is deprecated; use `dstPad.id`
       instead.
   * `padCreate`: The `author` context property is deprecated; use the new
@@ -205,7 +205,7 @@ If you haven't changed that value in the settings.json you are all set.
     `authorId` context property instead. Also, the hook now runs asynchronously.
 * Returning `true` from a `handleMessageSecurity` hook function is deprecated;
   return `'permitOnce'` instead.
-* Changes to the `src/static/js/Changeset.js` library:
+* Changes to the `ep_etherpad-lite/static/js/Changeset.js` library:
   * The following attribute processing functions are deprecated (use the new
     attribute APIs instead):
     * `attribsAttributeValue()`
@@ -314,7 +314,7 @@ git cherry-pick b7065eb9a0ec..77bcb507b30e
   * `author`: Deprecated; use the new `authorId` property instead.
   * `readonly`: Deprecated; use the new `readOnly` property instead.
   * `rev`: Deprecated.
-* Changes to the `src/static/js/Changeset.js` library:
+* Changes to the `ep_etherpad-lite/static/js/Changeset.js` library:
   * `opIterator()`: The unused start index parameter has been removed, as has
     the unused `lastIndex()` method on the returned object.
   * `smartOpAssembler()`: The returned object's `appendOpWithText()` method is
@@ -552,12 +552,12 @@ grow! :)
 ### Compatibility changes
 
 * Node.js 10.17.0 or newer is now required.
-* The `bin/` and `tests/` directories were moved under `src/`. Symlinks were
+* The `bin/` and `tests/` directories were moved under `ep_etherpad-lite/`. Symlinks were
   added at the old locations to hopefully avoid breaking user scripts and other
   tools.
 * Dependencies are now installed with the `--no-optional` flag to speed
   installation. Optional dependencies such as `sqlite3` must now be manually
-  installed (e.g., `(cd src && npm i sqlite3)`).
+  installed (e.g., `(cd ep_etherpad-lite && npm i sqlite3)`).
 * Socket.IO messages are now limited to 10K bytes to make denial of service
   attacks more difficult. This may cause issues when pasting large amounts of
   text or with plugins that send large messages (e.g., `ep_image_upload`). You
@@ -600,7 +600,7 @@ grow! :)
   * The following server-side hooks now support asynchronous hook functions:
     `expressConfigure`, `expressCreateServer`, `padCopy`, `padRemove`
   * Backend tests for plugins can now use the
-    [`ep_etherpad-lite/tests/backend/common`](src/tests/backend/common.js)
+    [`ep_etherpad-lite/tests/backend/common`](ep_etherpad-lite/tests/backend/common.js)
     module to start the server and simplify API access.
   * The `checkPlugins.js` script now automatically adds GitHub CI test coverage
     badges for backend tests and npm publish.
@@ -824,9 +824,9 @@ grow! :)
 * MINOR: started simplifying the code structure, flattening complex conditions
 * MINOR: simplified a bit the startup scripts
 
-*UPGRADE NOTES*: if you have custom files in `src/static/custom`, save them
+*UPGRADE NOTES*: if you have custom files in `ep_etherpad-lite/static/custom`, save them
 somewhere else, revert the directory contents, update to Etherpad 1.7.5, and
-finally put them back in their new location, uder `src/static/skins/no-skin`.
+finally put them back in their new location, uder `ep_etherpad-lite/static/skins/no-skin`.
 
 # 1.7.0
 * FIX: `getLineHTMLForExport()` no longer produces multiple copies of a line. **WARNING**: this could potentially break some plugins
