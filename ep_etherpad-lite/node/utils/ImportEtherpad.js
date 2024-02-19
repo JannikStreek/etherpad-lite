@@ -106,7 +106,7 @@ exports.setPadRaw = async (padId, r, authorId = '') => {
       // Shallow freeze meant to prevent accidental bugs. It would be better to deep freeze, but
       // it's not worth the added complexity.
       data: Object.freeze(records),
-      ep_etherpad-litePadId: originalPadId,
+      ep_etherpad_litePadId: originalPadId,
     });
     await pad.check();
   } finally {

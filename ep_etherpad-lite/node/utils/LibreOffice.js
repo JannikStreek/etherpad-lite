@@ -38,7 +38,7 @@ const doConvertTask = async (task) => {
     '--writer',
     '--convert-to',
     task.type,
-    task.ep_etherpad-liteFile,
+    task.ep_etherpad_liteFile,
     '--outdir',
     tmpDir,
   ], {stdio: [
@@ -46,7 +46,7 @@ const doConvertTask = async (task) => {
     (line) => logger.info(`[${p.child.pid}] stdout: ${line}`),
     (line) => logger.error(`[${p.child.pid}] stderr: ${line}`),
   ]});
-  logger.info(`[${p.child.pid}] Converting ${task.ep_etherpad-liteFile} to ${task.type} in ${tmpDir}`);
+  logger.info(`[${p.child.pid}] Converting ${task.ep_etherpad_liteFile} to ${task.type} in ${tmpDir}`);
   // Soffice/libreoffice is buggy and often hangs.
   // To remedy this we kill the spawned process after a while.
   // TODO: Use the timeout option once support for Node.js < v15.13.0 is dropped.
@@ -63,7 +63,7 @@ const doConvertTask = async (task) => {
     clearTimeout(hangTimeout);
   }
   logger.info(`[${p.child.pid}] Conversion done.`);
-  const filename = path.basename(task.ep_etherpad-liteFile);
+  const filename = path.basename(task.ep_etherpad_liteFile);
   const sourceFile = `${filename.substr(0, filename.lastIndexOf('.'))}.${task.fileExtension}`;
   const sourcePath = path.join(tmpDir, sourceFile);
   logger.debug(`Renaming ${sourcePath} to ${task.destFile}`);
@@ -76,22 +76,22 @@ const queue = async.queue(doConvertTask, 1);
 /**
  * Convert a file from one type to another
  *
- * @param  {String}     ep_etherpad-liteFile     The path on disk to convert
+ * @param  {String}     ep_etherpad_liteFile     The path on disk to convert
  * @param  {String}     destFile    The path on disk where the converted file should be stored
  * @param  {String}     type        The type to convert into
  * @param  {Function}   callback    Standard callback function
  */
-exports.convertFile = async (ep_etherpad-liteFile, destFile, type) => {
+exports.convertFile = async (ep_etherpad_liteFile, destFile, type) => {
   // Used for the moving of the file, not the conversion
   const fileExtension = type;
 
   if (type === 'html') {
     // "html:XHTML Writer File:UTF8" does a better job than normal html exports
-    if (path.extname(ep_etherpad-liteFile).toLowerCase() === '.doc') {
+    if (path.extname(ep_etherpad_liteFile).toLowerCase() === '.doc') {
       type = 'html';
     }
     // PDF files need to be converted with LO Draw ref https://github.com/ether/etherpad-lite/issues/4151
-    if (path.extname(ep_etherpad-liteFile).toLowerCase() === '.pdf') {
+    if (path.extname(ep_etherpad_liteFile).toLowerCase() === '.pdf') {
       type = 'html:XHTML Draw File';
     }
   }
@@ -101,9 +101,9 @@ exports.convertFile = async (ep_etherpad-liteFile, destFile, type) => {
   // to avoid `Error: no export filter for /tmp/xxxx.doc` error
   if (type === 'doc') {
     const intermediateFile = destFile.replace(/\.doc$/, '.odt');
-    await queue.pushAsync({ep_etherpad-liteFile, destFile: intermediateFile, type: 'odt', fileExtension: 'odt'});
-    await queue.pushAsync({ep_etherpad-liteFile: intermediateFile, destFile, type, fileExtension});
+    await queue.pushAsync({ep_etherpad_liteFile, destFile: intermediateFile, type: 'odt', fileExtension: 'odt'});
+    await queue.pushAsync({ep_etherpad_liteFile: intermediateFile, destFile, type, fileExtension});
   } else {
-    await queue.pushAsync({ep_etherpad-liteFile, destFile, type, fileExtension});
+    await queue.pushAsync({ep_etherpad_liteFile, destFile, type, fileExtension});
   }
 };

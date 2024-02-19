@@ -412,15 +412,15 @@ class Pad {
     // let the plugins know the pad was copied
     await hooks.aCallAll('padCopy', {
       get originalPad() {
-        warnDeprecated('padCopy originalPad context property is deprecated; use ep_etherpad-litePad instead');
-        return this.ep_etherpad-litePad;
+        warnDeprecated('padCopy originalPad context property is deprecated; use ep_etherpad_litePad instead');
+        return this.ep_etherpad_litePad;
       },
       get destinationID() {
         warnDeprecated(
             'padCopy destinationID context property is deprecated; use dstPad.id instead');
         return this.dstPad.id;
       },
-      ep_etherpad-litePad: this,
+      ep_etherpad_litePad: this,
       dstPad,
     });
 
@@ -513,15 +513,15 @@ class Pad {
 
     await hooks.aCallAll('padCopy', {
       get originalPad() {
-        warnDeprecated('padCopy originalPad context property is deprecated; use ep_etherpad-litePad instead');
-        return this.ep_etherpad-litePad;
+        warnDeprecated('padCopy originalPad context property is deprecated; use ep_etherpad_litePad instead');
+        return this.ep_etherpad_litePad;
       },
       get destinationID() {
         warnDeprecated(
             'padCopy destinationID context property is deprecated; use dstPad.id instead');
         return this.dstPad.id;
       },
-      ep_etherpad-litePad: this,
+      ep_etherpad_litePad: this,
       dstPad,
     });
 

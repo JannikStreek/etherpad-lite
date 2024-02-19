@@ -348,7 +348,7 @@ Order of events when a pad is copied:
 
 Context properties:
 
-  * `ep_etherpad-litePad`: The source Pad object.
+  * `ep_etherpad_litePad`: The source Pad object.
   * `dstPad`: The destination Pad object.
 
 Usage examples:
@@ -1030,7 +1030,7 @@ Context properties:
     care should be taken to avoid race conditions with other plugins.
   * `data`: Raw JSONable object from the `.etherpad` file. This data must not be
     modified.
-  * `ep_etherpad-litePadId`: The pad ID used for the pad-specific information in `data`.
+  * `ep_etherpad_litePadId`: The pad ID used for the pad-specific information in `data`.
 
 === import
 
@@ -1043,10 +1043,10 @@ function elected to convert the document to HTML.
 Context properties:
 
 * `destFile`: The destination HTML filename.
-* `fileEnding`: The lower-cased filename extension from `ep_etherpad-liteFile` **with leading
+* `fileEnding`: The lower-cased filename extension from `ep_etherpad_liteFile` **with leading
   period** (examples: `'.docx'`, `'.html'`, `'.etherpad'`).
 * `padId`: The identifier of the destination pad.
-* `ep_etherpad-liteFile`: The document to convert.
+* `ep_etherpad_liteFile`: The document to convert.
 * `ImportError`: Subclass of Error that can be thrown to provide a specific
   error message to the user. The constructor's first argument must be a string
   matching one of the https://github.com/ether/etherpad-lite/blob/1.9.6/ep_etherpad-lite/static/js/pad_impexp.js#L80-L86[known error identifiers].

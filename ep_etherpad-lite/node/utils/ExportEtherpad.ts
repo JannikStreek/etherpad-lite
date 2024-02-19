@@ -28,15 +28,15 @@ exports.getPadRaw = async (padId:string, readOnlyId:string) => {
     hooks.aCallAll('exportEtherpadAdditionalContent'),
   ]);
   const pluginRecords = await Promise.all(customPrefixes.map(async (customPrefix:string) => {
-    const ep_etherpad-litePfx = `${customPrefix}:${padId}`;
+    const eep_etherpad_litePfx = `${customPrefix}:${padId}`;
     const dstPfx = `${customPrefix}:${readOnlyId || padId}`;
-    assert(!ep_etherpad-litePfx.includes('*'));
-    const ep_etherpad-liteKeys = await pad.db.findKeys(`${ep_etherpad-litePfx}:*`, null);
+    assert(!eep_etherpad_litePfx.includes('*'));
+    const ep_etherpad_liteKeys = await pad.db.findKeys(`${eep_etherpad_litePfx}:*`, null);
     return (function* () {
-      yield [dstPfx, pad.db.get(ep_etherpad-litePfx)];
-      for (const k of ep_etherpad-liteKeys) {
-        assert(k.startsWith(`${ep_etherpad-litePfx}:`));
-        yield [`${dstPfx}${k.slice(ep_etherpad-litePfx.length)}`, pad.db.get(k)];
+      yield [dstPfx, pad.db.get(eep_etherpad_litePfx)];
+      for (const k of ep_etherpad_liteKeys) {
+        assert(k.startsWith(`${eep_etherpad_litePfx}:`));
+        yield [`${dstPfx}${k.slice(eep_etherpad_litePfx.length)}`, pad.db.get(k)];
       }
     })();
   }));

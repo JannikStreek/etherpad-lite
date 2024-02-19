@@ -89,8 +89,8 @@ exports.doExport = async (req, res, padId, readOnlyId, type) => {
 
     // else write the html export to a file
     const randNum = Math.floor(Math.random() * 0xFFFFFFFF);
-    const ep_etherpad-liteFile = `${tempDirectory}/etherpad_export_${randNum}.html`;
-    await fsp_writeFile(ep_etherpad-liteFile, html);
+    const ep_etherpad_liteFile = `${tempDirectory}/etherpad_export_${randNum}.html`;
+    await fsp_writeFile(ep_etherpad_liteFile, html);
 
     // ensure html can be collected by the garbage collector
     html = null;
@@ -99,7 +99,7 @@ exports.doExport = async (req, res, padId, readOnlyId, type) => {
     const destFile = `${tempDirectory}/etherpad_export_${randNum}.${type}`;
 
     // Allow plugins to overwrite the convert in export process
-    const result = await hooks.aCallAll('exportConvert', {ep_etherpad-liteFile, destFile, req, res});
+    const result = await hooks.aCallAll('exportConvert', {ep_etherpad_liteFile, destFile, req, res});
     if (result.length > 0) {
       // console.log("export handled by plugin", destFile);
     } else {
@@ -107,14 +107,14 @@ exports.doExport = async (req, res, padId, readOnlyId, type) => {
           settings.soffice != null ? require('../utils/LibreOffice')
           : settings.abiword != null ? require('../utils/Abiword')
           : null;
-      await converter.convertFile(ep_etherpad-liteFile, destFile, type);
+      await converter.convertFile(ep_etherpad_liteFile, destFile, type);
     }
 
     // send the file
     await res.sendFile(destFile, null);
 
     // clean up temporary files
-    await fsp_unlink(ep_etherpad-liteFile);
+    await fsp_unlink(ep_etherpad_liteFile);
 
     // 100ms delay to accommodate for slow windows fs
     if (os.type().indexOf('Windows') > -1) {

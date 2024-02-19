@@ -30,8 +30,8 @@ const os = require('os');
 // on windows we have to spawn a process for each convertion,
 // cause the plugin abicommand doesn't exist on this platform
 if (os.type().indexOf('Windows') > -1) {
-  exports.convertFile = async (ep_etherpad-liteFile: string, destFile: string, type: string) => {
-    const abiword = spawn(settings.abiword, [`--to=${destFile}`, ep_etherpad-liteFile]);
+  exports.convertFile = async (ep_etherpad_liteFile: string, destFile: string, type: string) => {
+    const abiword = spawn(settings.abiword, [`--to=${destFile}`, ep_etherpad_liteFile]);
     let stdoutBuffer = '';
     abiword.stdout.on('data', (data: string) => { stdoutBuffer += data.toString(); });
     abiword.stderr.on('data', (data: string) => { stdoutBuffer += data.toString(); });
@@ -80,14 +80,14 @@ if (os.type().indexOf('Windows') > -1) {
   spawnAbiword();
 
   const queue = async.queue((task: AsyncQueueTask, callback:Function) => {
-    abiword.stdin!.write(`convert ${task.ep_etherpad-liteFile} ${task.destFile} ${task.type}\n`);
+    abiword.stdin!.write(`convert ${task.ep_etherpad_liteFile} ${task.destFile} ${task.type}\n`);
     stdoutCallback = (err: string) => {
       if (err != null) console.error('Abiword File failed to convert', err);
       callback(err);
     };
   }, 1);
 
-  exports.convertFile = async (ep_etherpad-liteFile: string, destFile: string, type: string) => {
-    await queue.pushAsync({ep_etherpad-liteFile, destFile, type});
+  exports.convertFile = async (ep_etherpad_liteFile: string, destFile: string, type: string) => {
+    await queue.pushAsync({ep_etherpad_liteFile, destFile, type});
   };
 }

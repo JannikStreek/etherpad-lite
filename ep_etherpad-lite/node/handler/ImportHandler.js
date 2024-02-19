@@ -93,7 +93,7 @@ const doImport = async (req, res, padId, authorId) => {
     maxFileSize: settings.importMaxFileSize,
   });
 
-  let ep_etherpad-liteFile;
+  let ep_etherpad_liteFile;
   let files;
   let fields;
   try {
@@ -109,7 +109,7 @@ const doImport = async (req, res, padId, authorId) => {
     logger.warn('Import failed because form had no file');
     throw new ImportError('uploadFailed');
   } else {
-    ep_etherpad-liteFile = files.file[0].filepath;
+    ep_etherpad_liteFile = files.file[0].filepath;
   }
 
   // ensure this is a file ending we know, else we change the file ending to .txt
@@ -124,10 +124,10 @@ const doImport = async (req, res, padId, authorId) => {
 
     if (settings.allowUnknownFileEnds === true) {
       // we need to rename this file with a .txt ending
-      const oldep_etherpad-liteFile = ep_etherpad-liteFile;
+      const oldep_etherpad_liteFile = ep_etherpad_liteFile;
 
-      ep_etherpad-liteFile = path.join(path.dirname(ep_etherpad-liteFile), `${path.basename(ep_etherpad-liteFile, fileEnding)}.txt`);
-      await fs.rename(oldep_etherpad-liteFile, ep_etherpad-liteFile);
+      ep_etherpad_liteFile = path.join(path.dirname(ep_etherpad_liteFile), `${path.basename(ep_etherpad_liteFile, fileEnding)}.txt`);
+      await fs.rename(oldep_etherpad_liteFile, ep_etherpad_liteFile);
     } else {
       logger.warn(`Not allowing unknown file type to be imported: ${fileEnding}`);
       throw new ImportError('uploadFailed');
@@ -135,7 +135,7 @@ const doImport = async (req, res, padId, authorId) => {
   }
 
   const destFile = path.join(tmpDirectory, `etherpad_import_${randNum}.${exportExtension}`);
-  const context = {ep_etherpad-liteFile, destFile, fileEnding, padId, ImportError};
+  const context = {ep_etherpad_liteFile, destFile, fileEnding, padId, ImportError};
   const importHandledByPlugin = (await hooks.aCallAll('import', context)).some((x) => x);
   const fileIsEtherpad = (fileEnding === '.etherpad');
   const fileIsHTML = (fileEnding === '.html' || fileEnding === '.htm');
@@ -150,7 +150,7 @@ const doImport = async (req, res, padId, authorId) => {
       logger.warn('Aborting direct database import attempt of a pad that already has content');
       throw new ImportError('padHasData');
     }
-    const text = await fs.readFile(ep_etherpad-liteFile, 'utf8');
+    const text = await fs.readFile(ep_etherpad_liteFile, 'utf8');
     directDatabaseAccess = true;
     await importEtherpad.setPadRaw(padId, text, authorId);
   }
@@ -165,10 +165,10 @@ const doImport = async (req, res, padId, authorId) => {
     // See https://github.com/ether/etherpad-lite/issues/2572
     if (fileIsHTML || !useConverter) {
       // if no converter only rename
-      await fs.rename(ep_etherpad-liteFile, destFile);
+      await fs.rename(ep_etherpad_liteFile, destFile);
     } else {
       try {
-        await converter.convertFile(ep_etherpad-liteFile, destFile, exportExtension);
+        await converter.convertFile(ep_etherpad_liteFile, destFile, exportExtension);
       } catch (err) {
         logger.warn(`Converting Error: ${err.stack || err}`);
         throw new ImportError('convertFailed');
@@ -231,7 +231,7 @@ const doImport = async (req, res, padId, authorId) => {
   await padMessageHandler.updatePadClients(pad);
 
   // clean up temporary files
-  rm(ep_etherpad-liteFile);
+  rm(ep_etherpad_liteFile);
   rm(destFile);
 
   return false;
