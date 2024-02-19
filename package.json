@@ -38,6 +38,7 @@
     "ueberdb2": "^4.2.56",
     "measured-core": "^2.0.0",
     "axios": "^1.6.7",
+    "wtfnode": "^0.9.1",
     "ep_etherpad-lite": "workspace:./ep_etherpad-lite"
   },
   "devDependencies": {

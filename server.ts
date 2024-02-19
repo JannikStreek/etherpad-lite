@@ -154,8 +154,8 @@ exports.start = async () => {
         .map((plugin) => `${plugin.package.name}@${plugin.package.version}`)
         .join(', ');
     logger.info(`Installed plugins: ${installedPlugins}`);
-    logger.debug(`Installed parts:\n${plugins.formatParts()}`);
-    logger.debug(`Installed server-side hooks:\n${plugins.formatHooks('hooks', false)}`);
+    logger.info(`Installed parts:\n${plugins.formatParts()}`);
+    logger.info(`Installed server-side hooks:\n${plugins.formatHooks('hooks', false)}`);
     await hooks.aCallAll('loadSettings', {settings});
     await hooks.aCallAll('createServer');
   } catch (err) {
