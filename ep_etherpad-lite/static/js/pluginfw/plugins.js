@@ -120,6 +120,13 @@ exports.getPackages = async () => {
     newDependencies[plugin.name] = plugin
   }
 
+  newDependencies['ep_etherpad-lite'] = {
+    name: 'ep_etherpad-lite',
+    version: settings.getEpVersion(),
+    path: path.join(settings.root, 'node_modules/ep_etherpad-lite'),
+    realPath: path.join(settings.root, 'ep_etherpad-lite'),
+  }
+
   return newDependencies;
 };
 
