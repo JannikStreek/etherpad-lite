@@ -108,6 +108,7 @@ exports.update = async () => {
 
 exports.getPackages = async () => {
   let plugins = manager.list()
+  logger.info(plugins)
   let newDependencies = {}
 
   for (const plugin of plugins) {

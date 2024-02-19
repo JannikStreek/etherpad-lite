@@ -83,9 +83,6 @@ dependencies:
   unorm:
     specifier: 1.6.0
     version: 1.6.0
-  wtfnode:
-    specifier: ^0.9.1
-    version: 0.9.1
 
 devDependencies:
   '@types/async':
@@ -4360,11 +4357,6 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
-
-  /wtfnode@0.9.1:
-    resolution: {integrity: sha512-Ip6C2KeQPl/F3aP1EfOnPoQk14Udd9lffpoqWDNH3Xt78svxPbv53ngtmtfI0q2Te3oTq79XKTnRNXVIn/GsPA==}
-    hasBin: true
-    dev: false
 
   /xml-name-validator@5.0.0:
     resolution: {integrity: sha512-EvGK8EJ3DhaHfbRlETOWAS5pO9MZITeauHKJyb8wyajUfQUenkIg2MvLDTZ4T/TgIcm3HU0TFBgWWboAZ30UHg==}
